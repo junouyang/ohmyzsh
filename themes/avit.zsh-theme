@@ -1,12 +1,32 @@
 # AVIT ZSH Theme
 
-PROMPT='
-$(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
-%{$fg[$CARETCOLOR]%}▶%{$resetcolor%} '
+# PROMPT='
+# $(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
+# %{$fg[$CARETCOLOR]%}▶%{$resetcolor%} '
+if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
+local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-PROMPT2='%{$fg[$CARETCOLOR]%}◀%{$reset_color%} '
+# primary prompt
+#PROMPT='$FG[237]${(l.COLUMNS..-.)}%{$reset_color%}
+PROMPT='$FG[237]%{$reset_color%}
+$FG[032]%~ \
+$(git_prompt_info)$(hg_prompt_info) \
+$FG[105]%(!.#.»)%{$reset_color%} '
+PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
+RPS1='${return_code}'
 
-RPROMPT='$(_vi_status)%{$(echotc UP 1)%}$(_git_time_since_commit) $(git_prompt_status) ${_return_status}%{$(echotc DO 1)%}'
+
+# color vars
+eval my_gray='$FG[237]'
+eval my_orange='$FG[214]'
+
+# right prompt
+if type "virtualenv_prompt_info" > /dev/null
+then
+        RPROMPT='$FG[078]$(virtualenv_prompt_info)%{$reset_color%} $my_gray%n@%m%{$reset_color%}%'
+else
+        RPROMPT='$my_gray%n@%m%{$reset_color%}%'
+fi
 
 local _current_dir="%{$fg_bold[blue]%}%3~%{$reset_color%} "
 local _return_status="%{$fg_bold[red]%}%(?..⍉)%{$reset_color%}"
@@ -103,6 +123,10 @@ ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[white]%}"
 
 # LS colors, made with https://geoff.greer.fm/lscolors/
-export LSCOLORS="exfxcxdxbxegedabagacad"
-export LS_COLORS='di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
+#export LSCOLORS="exfxcxdxbxegedabagacad"
+#export LS_COLORS='di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
+#export LSCOLORS="gxfxcxdxbxegedabagacad"
+#export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43:'
+export LSCOLORS="gxfxcxdxbxegedabagacad"
+export LS_COLORS='di=1;36:ln=1;35:so=1;32:pi=1;33:ex=1;31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=34;43:'
 export GREP_COLOR='1;33'
