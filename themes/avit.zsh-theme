@@ -3,6 +3,7 @@
 # PROMPT='
 # $(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
 # %{$fg[$CARETCOLOR]%}▶%{$resetcolor%} '
+
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
