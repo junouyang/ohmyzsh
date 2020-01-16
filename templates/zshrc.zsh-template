@@ -1,8 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/Dropbox/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+export UBUNTU=10.67.8.16
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
